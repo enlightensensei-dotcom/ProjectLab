@@ -543,11 +543,11 @@
     }
 
     function openWhatsApp(orderId, phone, pages, amount, utr) {
-      const text = `👋 Hi PrintLab.NIT! New lab record print order.
-🆔 Order ID: ${orderId}
-📱 Phone: ${phone}
-📄 Pages: ${pages} (₹${amount} paid)
-🔖 UTR: ${utr}
+      const text = `Hi PrintLab.NIT! New lab record print order.
+*Order ID:* ${orderId}
+*Phone:* ${phone}
+*Pages:* ${pages} (Rs ${amount} paid)
+*UTR:* ${utr}
 I'm attaching my PDF and payment screenshot in this chat now.`;
       
       const encoded = encodeURIComponent(text);
