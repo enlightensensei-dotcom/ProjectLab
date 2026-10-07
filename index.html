@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PrintLab.NIT | Lab Record Printing @ ₹1/page</title>
+  <meta name="description" content="Prepaid monochrome laser printing of lab records on lab record paper. Pay by UPI, pick up on campus. Nalanda Institute of Technology, Bhubaneswar.">
+  <meta property="og:title" content="PrintLab.NIT | Lab Record Printing @ ₹1/page">
+  <meta property="og:description" content="Prepaid monochrome laser printing of lab records on lab record paper. Pay by UPI, pick up on campus. Nalanda Institute of Technology, Bhubaneswar.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#00d4ff">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              DEFAULT: '#00d4ff',
+              dark: '#00a3cc'
+            },
+            bg: '#0a0a0f'
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #0a0a0f;
+      color: #f3f4f6;
+    }
+    .glow {
+      box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+    }
+    .glow-strong {
+      box-shadow: 0 0 25px rgba(0, 212, 255, 0.6);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col relative pb-24 md:pb-0">
+
+  <!-- Main Content -->
+  <main class="max-w-3xl mx-auto px-4 py-8 md:py-12 flex-grow w-full">
+    
+    <!-- Hero -->
+    <header class="text-center mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4 text-white">Lab Records Printed <span class="text-brand">@ ₹1/Page</span></h1>
+      <p class="text-lg text-gray-300 mb-6">Monochrome laser prints on lab record paper, paper included. Pay by UPI, pick up on campus.</p>
+      <div class="flex flex-wrap justify-center gap-3 text-sm font-medium text-brand bg-brand/10 p-4 rounded-xl border border-brand/20">
+        <span>⚡ Fast turnaround</span>
+        <span class="hidden md:inline">•</span>
+        <span>📄 Lab record paper included</span>
+        <span class="hidden md:inline">•</span>
+        <span>🔒 Prepaid via UPI</span>
+        <span class="hidden md:inline">•</span>
+        <span>📍 Campus pickup</span>
+      </div>
+    </header>
+
+    <!-- How it works -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold mb-6 text-white text-center">How it works</h2>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="bg-gray-900 rounded-xl p-5 border border-gray-800 flex flex-col items-center text-center">
+          <div class="w-10 h-10 rounded-full bg-brand/20 text-brand flex items-center justify-center font-bold mb-3">1</div>
+          <h3 class="font-semibold text-white mb-1">Choose pages</h3>
+          <p class="text-sm text-gray-400">Select 50, 100, 150, or 200</p>
+        </div>
+        <div class="bg-gray-900 rounded-xl p-5 border border-gray-800 flex flex-col items-center text-center">
+          <div class="w-10 h-10 rounded-full bg-brand/20 text-brand flex items-center justify-center font-bold mb-3">2</div>
+          <h3 class="font-semibold text-white mb-1">Pay by UPI</h3>
+          <p class="text-sm text-gray-400">Scan the QR code</p>
+        </div>
+        <div class="bg-gray-900 rounded-xl p-5 border border-gray-800 flex flex-col items-center text-center">
+          <div class="w-10 h-10 rounded-full bg-brand/20 text-brand flex items-center justify-center font-bold mb-3">3</div>
+          <h3 class="font-semibold text-white mb-1">Send Details</h3>
+          <p class="text-sm text-gray-400">Enter UTR & send PDF on WhatsApp</p>
+        </div>
+        <div class="bg-gray-900 rounded-xl p-5 border border-gray-800 flex flex-col items-center text-center">
+          <div class="w-10 h-10 rounded-full bg-brand/20 text-brand flex items-center justify-center font-bold mb-3">4</div>
+          <h3 class="font-semibold text-white mb-1">Pick up</h3>
+          <p class="text-sm text-gray-400">Get notified where to pick up</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Container -->
+    <div id="appContainer">
+      <!-- Tier Selector -->
+      <section class="mb-8" id="tierSection">
+        <h2 class="text-xl font-bold mb-4 text-white">Select Pages</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="tierGrid">
+          <!-- Rendered by JS -->
+        </div>
+      </section>
+
+      <!-- Form & Payment Container (Hidden by default) -->
+      <div id="paymentOrderSection" class="hidden opacity-0 transition-opacity duration-300">
+        
+        <!-- Payment Module -->
+        <section class="bg-gray-900 rounded-2xl p-6 border border-gray-800 mb-8" id="paymentSection">
+          <h2 class="text-2xl font-bold mb-2 text-white text-center">Pay exactly <span id="paymentAmountDisplay" class="text-brand">₹0</span></h2>
+          <p class="text-center text-gray-400 text-sm mb-6">Scan with Google Pay / PhonePe / Paytm. The amount is already filled in, don't change it.</p>
+          
+          <div class="flex flex-col items-center justify-center mb-6">
+            <div class="bg-white p-2 rounded-xl mb-4 relative min-h-[200px] min-w-[200px] flex items-center justify-center">
+              <img id="qrImage" src="" alt="UPI QR Code" loading="lazy" class="w-48 h-48 object-contain transition-opacity duration-300">
+              <div id="qrFallback" class="hidden absolute inset-0 bg-gray-800 rounded-xl flex items-center justify-center p-4 text-center text-sm border border-gray-700">
+                QR image not available.<br>Use the UPI ID below to pay manually.
+              </div>
+            </div>
+            
+            <div class="bg-gray-800 rounded-lg p-3 w-full max-w-sm flex items-center justify-between">
+              <div>
+                <p class="text-xs text-gray-400 mb-1">UPI ID</p>
+                <p class="text-white font-mono text-sm" id="upiIdDisplay"></p>
+              </div>
+              <button type="button" id="copyUpiBtn" class="text-brand hover:text-brand-dark px-3 py-1.5 rounded-md bg-brand/10 hover:bg-brand/20 transition-colors text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand">
+                Copy
+              </button>
+            </div>
+          </div>
+          <p class="text-sm text-center text-brand bg-brand/10 p-3 rounded-lg">
+            After paying, note the 12-digit UTR / Transaction Ref from the payment receipt.
+          </p>
+        </section>
+
+        <!-- Order Form -->
+        <section class="bg-gray-900 rounded-2xl p-6 border border-gray-800 mb-8" id="formSection">
+          <h2 class="text-xl font-bold mb-6 text-white">Your Details</h2>
+          
+          <form id="orderForm" class="space-y-6" novalidate>
+            <div>
+              <label for="phoneInput" class="block text-sm font-medium text-gray-300 mb-2">Phone Number</label>
+              <input type="tel" id="phoneInput" inputmode="numeric" maxlength="10" placeholder="10-digit mobile number" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition-shadow" aria-describedby="phoneError">
+              <p id="phoneError" class="mt-2 text-sm text-red-400 hidden" aria-live="polite">Enter a valid 10-digit mobile number starting with 6-9</p>
+            </div>
+
+            <div>
+              <label for="utrInput" class="block text-sm font-medium text-gray-300 mb-2">UTR / Transaction Ref</label>
+              <input type="text" id="utrInput" inputmode="numeric" maxlength="12" placeholder="12-digit transaction reference" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition-shadow" aria-describedby="utrError">
+              <p id="utrError" class="mt-2 text-sm text-red-400 hidden" aria-live="polite">Enter the 12-digit UTR from your payment receipt</p>
+            </div>
+            
+            <div id="submitError" class="hidden bg-red-900/30 border border-red-500/50 rounded-lg p-4 text-red-200 text-sm" aria-live="assertive">
+              <!-- Error message here -->
+            </div>
+            
+            <div id="submitNotice" class="text-sm text-gray-400 mb-4 hidden">
+              WhatsApp can't attach files automatically. After it opens, tap the 📎 icon and attach your PDF and payment screenshot.
+            </div>
+
+            <button type="submit" id="submitBtn" disabled class="w-full bg-brand text-bg font-bold rounded-xl px-4 py-4 transition-all opacity-50 cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-bg focus:ring-brand flex items-center justify-center gap-2">
+              <span>Place Order & Open WhatsApp</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" /><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1" /></svg>
+            </button>
+          </form>
+        </section>
+      </div>
+      
+      <!-- Confirmation Screen -->
+      <section id="confirmationSection" class="hidden bg-gray-900 rounded-2xl p-8 border border-brand/50 text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-brand/5 pointer-events-none"></div>
+        <div class="w-16 h-16 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center mx-auto mb-6">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h2 class="text-2xl font-bold text-white mb-2">Order Placed!</h2>
+        <p class="text-gray-300 mb-6">We'll message you on WhatsApp when it's ready and tell you where to pick it up.</p>
+        
+        <div class="bg-gray-800 rounded-xl p-4 mb-8 inline-block mx-auto border border-gray-700">
+          <p class="text-xs text-gray-400 mb-1">Order ID</p>
+          <div class="flex items-center gap-3">
+            <span id="orderIdDisplay" class="text-2xl font-mono font-bold text-brand"></span>
+            <button id="copyOrderBtn" class="p-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-white transition-colors focus:outline-none focus:ring-2 focus:ring-brand" aria-label="Copy Order ID">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+            </button>
+          </div>
+        </div>
+        
+        <div>
+          <button id="resetBtn" class="text-gray-400 hover:text-white transition-colors underline focus:outline-none focus:ring-2 focus:ring-brand rounded px-2 py-1">Place Another Order</button>
+        </div>
+      </section>
+      
+    </div>
+
+  </main>
+
+  <!-- Sticky Bottom Bar (Mobile) -->
+  <div id="stickyBar" class="md:hidden fixed bottom-0 left-0 right-0 bg-gray-900/90 backdrop-blur-md border-t border-gray-800 p-4 z-50 transform transition-transform translate-y-0">
+    <div class="max-w-3xl mx-auto flex items-center justify-between">
+      <div>
+        <p class="text-xs text-gray-400">Selected</p>
+        <p id="stickySummary" class="text-white font-medium text-sm">Select a plan</p>
+      </div>
+      <button id="stickyBtn" class="bg-brand/20 text-brand px-5 py-2.5 rounded-lg font-medium opacity-50 cursor-not-allowed transition-all focus:outline-none focus:ring-2 focus:ring-brand" disabled>
+        Continue
+      </button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="max-w-3xl mx-auto px-4 py-8 border-t border-gray-800 text-center text-sm text-gray-500 pb-28 md:pb-8 w-full">
+    <p class="mb-4">
+      <a href="https://wa.me/918984777909" target="_blank" rel="noopener noreferrer" class="text-brand hover:underline inline-flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-brand rounded px-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+        Chat with us on WhatsApp
+      </a>
+    </p>
+    <p class="mb-2">Orders are for personal lab records only.</p>
+    <p class="mb-4 text-gray-400">If payment can't be verified, you'll be contacted on WhatsApp before anything is printed.</p>
+    <p>&copy; 2026 PrintLab.NIT</p>
+  </footer>
+
+  <!-- Aria Live for Announcements -->
+  <div id="announcer" aria-live="assertive" class="sr-only"></div>
+
+  <script>
+    // --- CONSTANTS ---
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/library/d/1fWcyIzcYkNchfU-euAzXBxIr_b4KJzxklTgWWwCK3IgQGwo0PHbGmKuB/1'; // Owner pastes their deployed Apps Script URL here
+    const UPI_ID = 'prabinjena15@okicici'; // Owner replaces with actual UPI ID
+    const WHATSAPP_NUMBER = '918984777909';
+    const TIERS = [
+      { pages: 50, price: 50, qr: 'assets/qr-50.png' },
+      { pages: 100, price: 100, qr: 'assets/qr-100.png' },
+      { pages: 150, price: 150, qr: 'assets/qr-150.png' },
+      { pages: 200, price: 200, qr: 'assets/qr-200.png' }
+    ];
+
+    // --- STATE ---
+    let selectedTier = null;
+    let isPhoneValid = false;
+    let isUtrValid = false;
+    let isSubmitting = false;
+    
+    // --- DOM ELEMENTS ---
+    const tierGrid = document.getElementById('tierGrid');
+    const paymentOrderSection = document.getElementById('paymentOrderSection');
+    const paymentAmountDisplay = document.getElementById('paymentAmountDisplay');
+    const qrImage = document.getElementById('qrImage');
+    const qrFallback = document.getElementById('qrFallback');
+    const upiIdDisplay = document.getElementById('upiIdDisplay');
+    const copyUpiBtn = document.getElementById('copyUpiBtn');
+    
+    const phoneInput = document.getElementById('phoneInput');
+    const phoneError = document.getElementById('phoneError');
+    const utrInput = document.getElementById('utrInput');
+    const utrError = document.getElementById('utrError');
+    const submitBtn = document.getElementById('submitBtn');
+    const submitError = document.getElementById('submitError');
+    const submitNotice = document.getElementById('submitNotice');
+    const orderForm = document.getElementById('orderForm');
+    
+    const confirmationSection = document.getElementById('confirmationSection');
+    const orderIdDisplay = document.getElementById('orderIdDisplay');
+    const copyOrderBtn = document.getElementById('copyOrderBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    
+    const stickySummary = document.getElementById('stickySummary');
+    const stickyBtn = document.getElementById('stickyBtn');
+    const announcer = document.getElementById('announcer');
+    const formSection = document.getElementById('formSection');
+
+    // --- INIT ---
+    function init() {
+      upiIdDisplay.textContent = UPI_ID;
+      renderTiers();
+      setupEventListeners();
+    }
+
+    // --- RENDER TIERS ---
+    function renderTiers() {
+      tierGrid.innerHTML = TIERS.map((tier, index) => \`
+        <button 
+          type="button" 
+          class="tier-btn relative flex flex-col items-center justify-center p-6 rounded-2xl border-2 transition-all duration-200 bg-gray-900 border-gray-800 hover:border-gray-600 focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 focus:ring-offset-bg"
+          data-index="\${index}"
+          aria-label="Select \${tier.pages} pages for ₹\${tier.price}"
+          aria-pressed="false"
+        >
+          <div class="text-3xl md:text-4xl font-bold text-white mb-2">\${tier.pages}</div>
+          <div class="text-gray-400 text-sm font-medium">Pages</div>
+          <div class="mt-4 text-xl font-bold text-brand">₹\${tier.price}</div>
+          
+          <div class="checkmark hidden absolute top-3 right-3 text-brand">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+        </button>
+      \`).join('');
+    }
+
+    // --- EVENT LISTENERS ---
+    function setupEventListeners() {
+      // Tier Selection
+      tierGrid.addEventListener('click', (e) => {
+        const btn = e.target.closest('.tier-btn');
+        if (!btn) return;
+        
+        const index = parseInt(btn.dataset.index);
+        selectTier(index);
+      });
+
+      // Sticky Button
+      stickyBtn.addEventListener('click', () => {
+        if (!selectedTier) return;
+        // Scroll to form
+        formSection.scrollIntoView({ behavior: 'smooth' });
+        phoneInput.focus();
+      });
+
+      // Phone Validation
+      phoneInput.addEventListener('input', (e) => {
+        // Strip non-digits
+        let val = e.target.value.replace(/\D/g, '');
+        
+        // Remove 91 prefix if exactly 12 digits and starts with 91
+        if (val.length > 10 && val.startsWith('91')) {
+          val = val.substring(2);
+        }
+        
+        // Truncate to 10
+        val = val.substring(0, 10);
+        e.target.value = val;
+        
+        validateForm();
+      });
+      
+      phoneInput.addEventListener('blur', () => {
+        const val = phoneInput.value;
+        const valid = val.length === 10 && /^[6-9]/.test(val);
+        phoneError.classList.toggle('hidden', valid || val.length === 0);
+        if (!valid && val.length > 0) announcer.textContent = phoneError.textContent;
+      });
+
+      // UTR Validation
+      utrInput.addEventListener('input', (e) => {
+        // Strip non-digits
+        let val = e.target.value.replace(/\D/g, '');
+        val = val.substring(0, 12);
+        e.target.value = val;
+        
+        validateForm();
+      });
+      
+      utrInput.addEventListener('blur', () => {
+        const val = utrInput.value;
+        const valid = val.length === 12;
+        utrError.classList.toggle('hidden', valid || val.length === 0);
+        if (!valid && val.length > 0) announcer.textContent = utrError.textContent;
+      });
+
+      // Form Submission
+      orderForm.addEventListener('submit', handleFormSubmit);
+
+      // Copy Buttons
+      copyUpiBtn.addEventListener('click', () => copyToClipboard(UPI_ID, copyUpiBtn, 'Copy'));
+      copyOrderBtn.addEventListener('click', () => copyToClipboard(orderIdDisplay.textContent, copyOrderBtn, '', true));
+
+      // Reset
+      resetBtn.addEventListener('click', resetApp);
+      
+      // QR image error fallback
+      qrImage.addEventListener('error', () => {
+        qrImage.classList.add('hidden');
+        qrFallback.classList.remove('hidden');
+      });
+      qrImage.addEventListener('load', () => {
+        qrImage.classList.remove('hidden');
+        qrFallback.classList.add('hidden');
+      });
+    }
+
+    function selectTier(index) {
+      selectedTier = TIERS[index];
+      
+      // Update UI
+      document.querySelectorAll('.tier-btn').forEach((btn, i) => {
+        const isSelected = i === index;
+        btn.setAttribute('aria-pressed', isSelected);
+        
+        if (isSelected) {
+          btn.classList.remove('border-gray-800', 'bg-gray-900');
+          btn.classList.add('border-brand', 'bg-gray-800', 'glow');
+          btn.querySelector('.checkmark').classList.remove('hidden');
+        } else {
+          btn.classList.add('border-gray-800', 'bg-gray-900');
+          btn.classList.remove('border-brand', 'bg-gray-800', 'glow');
+          btn.querySelector('.checkmark').classList.add('hidden');
+        }
+      });
+
+      // Show Payment & Form section
+      paymentOrderSection.classList.remove('hidden');
+      // small delay to allow display block to apply before opacity transition
+      setTimeout(() => {
+        paymentOrderSection.classList.remove('opacity-0');
+      }, 10);
+
+      // Update Payment info
+      paymentAmountDisplay.textContent = \`₹\${selectedTier.price}\`;
+      
+      // Fade QR swap
+      qrImage.style.opacity = '0';
+      setTimeout(() => {
+        qrImage.src = selectedTier.qr;
+        qrImage.style.opacity = '1';
+      }, 200);
+
+      // Update sticky bar
+      stickySummary.textContent = \`\${selectedTier.pages} pages · ₹\${selectedTier.price}\`;
+      stickyBtn.classList.remove('opacity-50', 'cursor-not-allowed', 'bg-brand/20');
+      stickyBtn.classList.add('bg-brand', 'text-bg', 'glow');
+      stickyBtn.removeAttribute('disabled');
+      
+      announcer.textContent = \`Selected \${selectedTier.pages} pages for ₹\${selectedTier.price}. Payment section revealed.\`;
+      
+      validateForm();
+    }
+
+    function validateForm() {
+      const pVal = phoneInput.value;
+      isPhoneValid = pVal.length === 10 && /^[6-9]/.test(pVal);
+      
+      const uVal = utrInput.value;
+      isUtrValid = uVal.length === 12;
+
+      const isValid = selectedTier && isPhoneValid && isUtrValid;
+      
+      if (isValid) {
+        submitBtn.removeAttribute('disabled');
+        submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+        submitBtn.classList.add('glow');
+        submitNotice.classList.remove('hidden');
+      } else {
+        submitBtn.setAttribute('disabled', 'true');
+        submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+        submitBtn.classList.remove('glow');
+        submitNotice.classList.add('hidden');
+      }
+    }
+
+    async function handleFormSubmit(e) {
+      e.preventDefault();
+      if (!selectedTier || !isPhoneValid || !isUtrValid || isSubmitting) return;
+
+      if (!navigator.onLine) {
+        showError("You appear to be offline. Please check your connection and try again.");
+        return;
+      }
+
+      isSubmitting = true;
+      submitBtn.classList.add('opacity-75', 'cursor-wait');
+      submitBtn.innerHTML = \`
+        <svg class="animate-spin -ml-1 mr-2 h-5 w-5 text-bg inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        Processing...
+      \`;
+      submitError.classList.add('hidden');
+
+      const orderId = \`PLN-\${Math.floor(1000 + Math.random() * 9000)}\`;
+      const phone = phoneInput.value;
+      const utr = utrInput.value;
+      const pages = selectedTier.pages;
+      const amount = selectedTier.price;
+
+      let proceedToWhatsApp = true;
+
+      if (APPS_SCRIPT_URL) {
+        try {
+          // Add timeout to fetch
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 10000);
+          
+          const response = await fetch(APPS_SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({ action: 'newOrder', orderId, phone, pages, amount, utr }),
+            signal: controller.signal
+          });
+          clearTimeout(timeoutId);
+          
+          const result = await response.json();
+          if (!result.success) {
+            showError(result.error || 'Order could not be saved. Please try again.');
+            resetSubmitButton();
+            isSubmitting = false;
+            return;
+          }
+        } catch (error) {
+          console.error("Error submitting to backend:", error);
+          showError("Network issue while saving order. You can try again or proceed to WhatsApp and we'll process it manually.");
+          proceedToWhatsApp = false;
+        }
+      } else {
+        console.warn('Backend URL not configured. Orders will not be saved to Google Sheet.');
+      }
+
+      if (proceedToWhatsApp) {
+        showConfirmation(orderId);
+        openWhatsApp(orderId, phone, pages, amount, utr);
+      }
+      
+      resetSubmitButton();
+    }
+
+    function showError(msg) {
+      submitError.textContent = msg;
+      submitError.classList.remove('hidden');
+      announcer.textContent = msg;
+    }
+
+    function resetSubmitButton() {
+      isSubmitting = false;
+      submitBtn.classList.remove('opacity-75', 'cursor-wait');
+      submitBtn.innerHTML = \`
+        <span>Place Order & Open WhatsApp</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" /><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1" /></svg>
+      \`;
+    }
+
+    function openWhatsApp(orderId, phone, pages, amount, utr) {
+      const text = \`👋 Hi PrintLab.NIT! New lab record print order.
+🆔 Order ID: \${orderId}
+📱 Phone: \${phone}
+📄 Pages: \${pages} (₹\${amount} paid)
+🔖 UTR: \${utr}
+I'm attaching my PDF and payment screenshot in this chat now.\`;
+      
+      const encoded = encodeURIComponent(text);
+      const url = \`https://wa.me/\${WHATSAPP_NUMBER}?text=\${encoded}\`;
+      
+      // Open in new tab or app
+      window.open(url, '_blank');
+    }
+
+    function showConfirmation(orderId) {
+      document.getElementById('appContainer').children[0].classList.add('hidden'); // tier section
+      paymentOrderSection.classList.add('hidden');
+      
+      document.getElementById('stickyBar').classList.add('translate-y-full'); // hide sticky bar
+      
+      orderIdDisplay.textContent = orderId;
+      confirmationSection.classList.remove('hidden');
+      
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      announcer.textContent = \`Order placed successfully. Your order ID is \${orderId}. We will message you on WhatsApp.\`;
+    }
+
+    function resetApp() {
+      // Reset State
+      selectedTier = null;
+      phoneInput.value = '';
+      utrInput.value = '';
+      submitError.classList.add('hidden');
+      phoneError.classList.add('hidden');
+      utrError.classList.add('hidden');
+      
+      // Reset UI
+      document.querySelectorAll('.tier-btn').forEach(btn => {
+        btn.setAttribute('aria-pressed', 'false');
+        btn.classList.add('border-gray-800', 'bg-gray-900');
+        btn.classList.remove('border-brand', 'bg-gray-800', 'glow');
+        btn.querySelector('.checkmark').classList.add('hidden');
+      });
+      
+      paymentOrderSection.classList.add('hidden', 'opacity-0');
+      confirmationSection.classList.add('hidden');
+      document.getElementById('appContainer').children[0].classList.remove('hidden');
+      
+      stickySummary.textContent = 'Select a plan';
+      stickyBtn.classList.add('opacity-50', 'cursor-not-allowed', 'bg-brand/20');
+      stickyBtn.classList.remove('bg-brand', 'text-bg', 'glow');
+      stickyBtn.setAttribute('disabled', 'true');
+      document.getElementById('stickyBar').classList.remove('translate-y-full');
+      
+      validateForm();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      announcer.textContent = "Form reset. Select pages to start a new order.";
+    }
+
+    function copyToClipboard(text, btnElement, defaultText = '', isIconBtn = false) {
+      navigator.clipboard.writeText(text).then(() => {
+        const originalHTML = btnElement.innerHTML;
+        
+        if (isIconBtn) {
+          btnElement.innerHTML = \`<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>\`;
+        } else {
+          btnElement.textContent = 'Copied!';
+          btnElement.classList.add('text-green-400');
+        }
+        
+        announcer.textContent = "Copied to clipboard";
+
+        setTimeout(() => {
+          btnElement.innerHTML = originalHTML;
+          if (!isIconBtn) {
+            btnElement.classList.remove('text-green-400');
+          }
+        }, 1500);
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    }
+
+    // Run Init
+    init();
+  </script>
+</body>
+</html>
